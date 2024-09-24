@@ -69,3 +69,11 @@ const deleteAnimal = async (req, res) => {
         res.status(500).json({ error: 'Erro ao deletar animal' });
     }
 };
+
+module.exports = {
+    getAllAnimais,
+    getAnimalById,
+    createAnimal,
+    updateAnimal,
+    deleteAnimal,
+};
