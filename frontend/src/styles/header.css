@@ -1,0 +1,104 @@
+.cabecalho {
+    background: linear-gradient(to right, #1a202c, #2d3748);
+    color: white;
+    padding: 16px; 
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+  }
+  
+  .conteudo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .marca {
+    display: flex;
+    align-items: center;
+  }
+  
+  .nome-marca {
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 8px;
+  }
+  
+  .menu-desktop {
+    gap: 10px;
+    display: none;
+  }
+  
+  @media (min-width: 768px) {
+    .menu-desktop {
+      display: flex;
+    }
+  }
+  
+  .link-menu {
+    color: #e2e8f0;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+  }
+  
+  .link-menu:hover {
+    background-color: #4a5568;
+    border-radius: 4px; 
+  }
+  
+  .botao-acao {
+    background-color: #4eafa4;
+    color: white;
+    padding: 8px 16px; 
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .botao-acao:hover {
+    background-color: #337162;
+  }
+  
+  .botao-menu-mobile {
+    display: block;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  @media (min-width: 768px) {
+    .botao-menu-mobile {
+      display: none;
+    }
+  }
+  
+  .menu-mobile {
+    background-color: #2d3748;
+    padding: 16px; 
+  }
+  
+  .link-menu-mobile {
+    display: block;
+    color: #e2e8f0;
+    padding: 8px 0; 
+    text-decoration: none;
+  }
+  
+    .botao-acao-mobile {
+    width: 100%;
+    background-color: #4eafa4;
+    color: white;
+    padding: 8px; 
+    border: none;
+    border-radius: 4px; 
+    cursor: pointer;
+    margin-top: 16px; 
+  }

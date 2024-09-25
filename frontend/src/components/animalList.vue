@@ -1,27 +1,24 @@
 <template>
-    <div>
-      <h2>Lista de Animais</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Nome</th>
-            <th>Idade</th>
-            <th>Peso</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="animal in animais" :key="animal.id">
-            <td>{{ animal.nome }}</td>
-            <td>{{ animal.idade }}</td>
-            <td>{{ animal.peso }}</td>
-            <td>
-              <button @click="editAnimal(animal)">Editar</button>
-              <button @click="deleteAnimal(animal.id)">Excluir</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="container-lista">
+      <h2 class="titulo">Lista de Animais</h2>
+      <div class="lista-cards">
+        <div v-for="animal in animais" :key="animal.id" class="card-animal">
+          <h3 class="nome-animal">{{ animal.nome }}</h3>
+          <div class="info-animal">
+            <p><strong>Idade:</strong> {{ animal.idade }} anos</p>
+            <p><strong>Peso:</strong> {{ animal.peso }}</p>
+            <p><strong>Status de Saúde:</strong> {{ animal.statusSaude }}</p>
+            <p><strong>Habitat:</strong> {{ animal.habitat }}</p>
+            <p><strong>Comportamento:</strong> {{ animal.comportamento }}</p>
+            <p><strong>Dieta:</strong> {{ animal.dieta }}</p>
+            <p><strong>Observação:</strong> {{ animal.observacao }}</p>
+          </div>
+          <div class="acoes-animal">
+            <button @click="editarAnimal(animal)" class="botao botao-editar">Editar</button>
+            <button @click="excluirAnimal(animal.id)" class="botao botao-excluir">Excluir</button>
+          </div>
+        </div>
+      </div>
     </div>
   </template>
   
@@ -46,7 +43,7 @@
       async deleteAnimal(id) {
         try {
           await axios.delete(`http://localhost:3000/animais/${id}`);
-          this.fetchAnimais(); // Recarrega a lista após a exclusão
+          this.fetchAnimais();
         } catch (error) {
           console.error(error);
         }
@@ -60,4 +57,8 @@
     },
   };
   </script>
+
+<style>
+    @import '../styles/animalList.css';
+</style>
   

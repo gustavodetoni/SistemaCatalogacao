@@ -1,0 +1,84 @@
+.container-lista {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .titulo {
+    color: #333;
+    font-size: 28px;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  
+  .lista-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .card-animal {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    transition: transform 0.3s ease;
+  }
+  
+  .card-animal:hover {
+    transform: translateY(-5px);
+  }
+  
+  .nome-animal {
+    color: #4c51bf;
+    font-size: 22px;
+    margin-bottom: 15px;
+  }
+  
+  .info-animal p {
+    margin: 8px 0;
+    font-size: 14px;
+  }
+  
+  .acoes-animal {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .botao {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .botao-editar {
+    background-color: #4c51bf;
+    color: white;
+  }
+  
+  .botao-excluir {
+    background-color: #e53e3e;
+    color: white;
+  }
+  
+  .botao:hover {
+    opacity: 0.8;
+  }
+  
+  @media (max-width: 768px) {
+    .lista-cards {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .card-animal {
+      width: 100%;
+      max-width: 400px;
+    }
+  }

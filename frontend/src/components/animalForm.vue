@@ -89,4 +89,8 @@
     },
   };
   </script>
+
+<style>
+    @import '../styles/animalForm.css';
+</style>
   
