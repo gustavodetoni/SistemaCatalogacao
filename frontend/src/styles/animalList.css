@@ -6,8 +6,9 @@ body, .card-animal, .botao {
 
 container-lista {
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 10 auto;
   padding: 20px;
+  min-height: 100vh; 
 }
 
 .titulo {
@@ -22,6 +23,7 @@ container-lista {
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
+  flex-grow: 1;
 }
 
 .card-animal {
@@ -43,6 +45,10 @@ container-lista {
   color: #4eafa4;
   font-size: 22px;
   margin-bottom: 15px;
+}
+
+.info-animal {
+  flex-grow: 1; 
 }
 
 .info-animal p {
@@ -93,3 +99,29 @@ container-lista {
     max-width: 400px;
   }
 }
+
+  .filtros {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    gap: 10px;
+  }
+  
+  .filtro-input,
+  .filtro-select {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  .filtro-select {
+    background-color: white;
+  }
+  
+  @media (max-width: 768px) {
+    .filtros {
+      flex-direction: column;
+    }
+  }
