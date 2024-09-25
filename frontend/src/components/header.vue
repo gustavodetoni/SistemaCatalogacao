@@ -10,9 +10,9 @@
             {{ item.nome }}
           </a>
 
-        <button class="botao-acao">
+          <router-link to="/adicionar-animal" class="botao-acao">
           Adicionar Animal
-        </button>
+        </router-link>
         </nav>
   
         <button @click="abrirMenuMobile" class="botao-menu-mobile">
@@ -25,7 +25,7 @@
         <a v-for="item in itensMenu" :key="item.nome" :href="item.link" class="link-menu-mobile">
           {{ item.nome }}
         </a>
-        <button class="botao-acao-mobile">
+        <button class="botao-acao-mobile" @click="irParaAdicionarAnimal">
             Adicionar Animal
         </button>
       </div>
@@ -34,9 +34,12 @@
   
   <script setup>
   import { ref } from 'vue'
+  import { useRouter } from 'vue-router';
   
+  const router = useRouter(); 
+
   const itensMenu = [
-    { nome: 'Início', link: '#' },
+    { nome: 'Início', link: '/' },
     { nome: 'Sobre', link: '#' },
   ]
   
@@ -45,6 +48,8 @@
   const abrirMenuMobile = () => {
     menuMobileAberto.value = !menuMobileAberto.value
   }
+
+  
   </script>
   
   <style>

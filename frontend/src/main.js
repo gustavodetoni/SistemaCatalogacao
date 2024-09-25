@@ -9,12 +9,14 @@ const routes = [
     {
         path: '/',
         name: 'Home',
-        components: {
-            default: AnimalList,
-            form: AnimalForm
-        },
+        component: AnimalList, 
     },
-];
+    {
+        path: '/adicionar-animal',
+        name: 'AdicionarAnimal',
+        component: AnimalForm, 
+    },
+]
 
 const router = createRouter({
     history: createWebHistory(),

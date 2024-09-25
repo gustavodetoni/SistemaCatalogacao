@@ -1,10 +1,7 @@
 <template>
   <div id="app">
     <HeaderPrincipal />
-    <main>
-      <AnimalForm @form-submitted="fetchAnimais" :animalToEdit="animalToEdit" />
-      <AnimalList @edit-animal="setAnimalToEdit" />
-    </main>
+    <router-view />
   </div>
 </template>
 
@@ -15,9 +12,9 @@ import HeaderPrincipal from './components/header.vue';
 
 export default {
   components: {
+    HeaderPrincipal,
     AnimalList,
-    AnimalForm,
-    HeaderPrincipal
+    AnimalForm
   },
   data() {
     return {

@@ -7,7 +7,7 @@
           <div class="info-animal">
             <p><strong>Idade:</strong> {{ animal.idade }} anos</p>
             <p><strong>Peso:</strong> {{ animal.peso }}</p>
-            <p><strong>Status de Saúde:</strong> {{ animal.statusSaude }}</p>
+            <p><strong>Status de Saúde:</strong> {{ animal.status_de_saude }}</p>
             <p><strong>Habitat:</strong> {{ animal.habitat }}</p>
             <p><strong>Comportamento:</strong> {{ animal.comportamento }}</p>
             <p><strong>Dieta:</strong> {{ animal.dieta }}</p>
@@ -40,7 +40,7 @@
           console.error(error);
         }
       },
-      async deleteAnimal(id) {
+      async excluirAnimal(id) {
         try {
           await axios.delete(`http://localhost:3000/animais/${id}`);
           this.fetchAnimais();
@@ -48,7 +48,7 @@
           console.error(error);
         }
       },
-      editAnimal(animal) {
+      editarAnimal(animal) {
         this.$emit('edit-animal', animal);
       },
     },
