@@ -27,6 +27,11 @@ const getAnimalById = async (req, res) => {
 const createAnimal = async (req, res) => {
     const { nome, idade, peso, status_de_saude, habitat, comportamento, dieta, observacao } = req.body;
     try {
+        const existingAnimal = await pool.query('SELECT * FROM animais WHERE nome = $1 AND idade = $2', [nome, idade]);
+        if (existingAnimal.rows.length > 0) {
+            return res.status(400).json({ error: 'Este animal já existe.' });
+        }
+
         const result = await pool.query(
             'INSERT INTO animais (nome, idade, peso, status_de_saude, habitat, comportamento, dieta, observacao) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
             [nome, idade, peso, status_de_saude, habitat, comportamento, dieta, observacao]
