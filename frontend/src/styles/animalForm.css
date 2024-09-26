@@ -27,6 +27,7 @@ body {
 }
 
 .formulario {
+  margin-right: 20px;
   display: flex;
   flex-wrap: wrap;
 }
@@ -72,6 +73,7 @@ textarea {
 }
 
 .botao-enviar {
+  font-weight: bold;
   background-color: #4eafa4;
   color: white;
   border: none;
@@ -88,6 +90,7 @@ textarea {
 }
 
 .botao-limpar {
+  font-weight: bold;
   background-color: #d85c43;
   color: black;
   border: none;

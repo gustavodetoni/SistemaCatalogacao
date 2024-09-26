@@ -6,7 +6,7 @@ body, .card-animal, .botao {
 
 container-lista {
   max-width: 1200px;
-  margin: 10 auto;
+  margin-top: 10 auto;
   padding: 20px;
   min-height: 100vh; 
 }
@@ -45,6 +45,8 @@ container-lista {
   color: #4eafa4;
   font-size: 22px;
   margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
 }
 
 .info-animal {
@@ -103,7 +105,7 @@ container-lista {
   .filtros {
     display: flex;
     justify-content: space-between;
-    margin-top: 40px;
+    margin: 40px;
     gap: 10px;
   }
   

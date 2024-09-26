@@ -69,6 +69,18 @@ export default {
   },
   methods: {
     async enviarFormulario() {
+      if (
+      !this.animal.nome ||
+      !this.animal.idade ||
+      !this.animal.peso ||
+      !this.animal.status_de_saude ||
+      !this.animal.habitat ||
+      !this.animal.comportamento ||
+      !this.animal.dieta
+    ) {
+      alert('Por favor, preencha todos os campos obrigatórios.');
+      return;
+    }
       try {
         await axios.post('http://localhost:3000/animais', this.animal);
         this.popupVisivel = true;
