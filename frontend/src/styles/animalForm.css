@@ -92,7 +92,7 @@ textarea {
 .botao-limpar {
   font-weight: bold;
   background-color: #d85c43;
-  color: black;
+  color: white;
   border: none;
   padding: 12px;
   border-radius: 4px;
@@ -127,17 +127,18 @@ textarea {
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 20px;
-  background-color: #4caf50;
+  background-color: #2d3748;
   color: white;
-  border-radius: 5px;
+  border-radius: 9px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
 .popup button {
+  width: 100px;
   margin-top: 10px;
-  background-color: #ffffff;
-  color: #4caf50;
+  background-color: #4eafa4;
+  color: #ffffff;
   border: none;
   padding: 5px 10px;
   cursor: pointer;
@@ -145,5 +146,5 @@ textarea {
 }
 
 .popup button:hover {
-  background-color: #f1f1f1;
+  opacity: 0.8;;
 }

@@ -26,8 +26,8 @@
           <p><strong>Observação:</strong> {{ animal.observacao }}</p>
         </div>
         <div class="acoes-animal">
-          <button @click="abrirModalEdicao(animal)" class="botao botao-editar">Editar</button>
-          <button @click="excluirAnimal(animal.id)" class="botao botao-excluir">Excluir</button>
+          <img src="../assets/editar.png" class="botao"  @click="abrirModalEdicao(animal)" />
+          <img src="../assets/lixo.png" class="botao" @click="excluirAnimal(animal.id)" />
         </div>
       </div>
     </div>
@@ -131,16 +131,16 @@ export default {
       }
     },
     abrirModalEdicao(animal) {
-      this.animalEditado = { ...animal };  
-      this.modalVisivel = true;  
+      this.animalEditado = { ...animal };
+      this.modalVisivel = true;
     },
     fecharModal() {
-      this.modalVisivel = false;  
+      this.modalVisivel = false;
     },
     async salvarEdicao() {
       try {
         await axios.put(`http://localhost:3000/animais/${this.animalEditado.id}`, this.animalEditado);
-        this.animalSelecionado = null; 
+        this.animalSelecionado = null;
         this.modalVisivel = false;
         await this.fetchAnimais();
       } catch (error) {
@@ -148,7 +148,7 @@ export default {
       }
     },
     cancelarEdicao() {
-      this.animalSelecionado = null; 
+      this.animalSelecionado = null;
     },
   },
   mounted() {

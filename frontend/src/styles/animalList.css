@@ -74,6 +74,8 @@ container-lista {
   cursor: pointer;
   font-size: 14px;
   transition: background-color 0.3s ease;
+  width: 35px;
+  height: 35px;
 }
 
 .botao-editar {

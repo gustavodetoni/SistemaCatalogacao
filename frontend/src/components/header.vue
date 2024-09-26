@@ -39,8 +39,8 @@
   const router = useRouter(); 
 
   const itensMenu = [
-    { nome: 'Início', link: '/' },
-    { nome: 'Sobre', link: '#' },
+    { nome: 'Catalogo', link: '/' },
+    { nome: 'Download', link: '/download' },
   ]
   
   const menuMobileAberto = ref(false)
