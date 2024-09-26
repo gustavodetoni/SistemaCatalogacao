@@ -1,19 +1,18 @@
 <template>
-    <div class="filtros">
-      <input v-model="filtroNome" @input="aplicarFiltros" placeholder="Filtrar por nome" class="filtro-input">
-      <input v-model.number="filtroIdade" @input="aplicarFiltros" type="number" placeholder="Filtrar por idade"
-        class="filtro-input">
-      <input v-model.number="filtroPeso" @input="aplicarFiltros" type="number" placeholder="Filtrar por peso"
-        class="filtro-input">
-      <select v-model="filtroHabitat" @change="aplicarFiltros" class="filtro-select">
-        <option value="">Todos os habitats</option>
-        <option v-for="habitat in habitatsUnicos" :key="habitat" :value="habitat">
-          {{ habitat }}
-        </option>
-      </select>
-    </div>
-    <div class="container-lista">
-    <h2 class="titulo"></h2>
+  <div class="filtros">
+    <input v-model="filtroNome" @input="aplicarFiltros" placeholder="Filtrar por nome" class="filtro-input">
+    <input v-model.number="filtroIdade" @input="aplicarFiltros" type="number" placeholder="Filtrar por idade"
+      class="filtro-input">
+    <input v-model.number="filtroPeso" @input="aplicarFiltros" type="number" placeholder="Filtrar por peso"
+      class="filtro-input">
+    <select v-model="filtroHabitat" @change="aplicarFiltros" class="filtro-select">
+      <option value="">Todos os habitats</option>
+      <option v-for="habitat in habitatsUnicos" :key="habitat" :value="habitat">
+        {{ habitat }}
+      </option>
+    </select>
+  </div>
+  <div class="container-lista">
     <div class="lista-cards">
       <div v-for="animal in animaisFiltrados" :key="animal.id" class="card-animal">
         <h3 class="nome-animal">{{ animal.nome }}</h3>
@@ -27,10 +26,54 @@
           <p><strong>Observação:</strong> {{ animal.observacao }}</p>
         </div>
         <div class="acoes-animal">
-          <button @click="editarAnimal(animal)" class="botao botao-editar">Editar</button>
+          <button @click="abrirModalEdicao(animal)" class="botao botao-editar">Editar</button>
           <button @click="excluirAnimal(animal.id)" class="botao botao-excluir">Excluir</button>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div v-if="modalVisivel" class="modal-fundo" @click="fecharModal">
+    <div class="modal-conteudo" @click.stop>
+      <h2 class="modal-titulo">Editar Animal</h2>
+      <form @submit.prevent="salvarEdicao" class="formulario">
+        <div class="campo">
+          <label for="nome">Nome:</label>
+          <input id="nome" v-model="animalEditado.nome" type="text" />
+        </div>
+        <div class="campo">
+          <label for="idade">Idade:</label>
+          <input id="idade" v-model.number="animalEditado.idade" type="number" />
+        </div>
+        <div class="campo">
+          <label for="peso">Peso:</label>
+          <input id="peso" v-model.number="animalEditado.peso" type="number" />
+        </div>
+        <div class="campo">
+          <label for="status">Status de Saúde:</label>
+          <input id="status" v-model="animalEditado.status_de_saude" type="text" />
+        </div>
+        <div class="campo">
+          <label for="habitat">Habitat:</label>
+          <input id="habitat" v-model="animalEditado.habitat" type="text" />
+        </div>
+        <div class="campo">
+          <label for="comportamento">Comportamento:</label>
+          <input id="comportamento" v-model="animalEditado.comportamento" type="text" />
+        </div>
+        <div class="campo">
+          <label for="dieta">Dieta:</label>
+          <input id="dieta" v-model="animalEditado.dieta" type="text" />
+        </div>
+        <div class="campo">
+          <label for="observacao">Observação:</label>
+          <textarea id="observacao" v-model="animalEditado.observacao" rows="3"></textarea>
+        </div>
+        <div class="botoes">
+          <button type="submit" class="botao botao-salvar">Salvar</button>
+          <button type="button" @click="fecharModal" class="botao botao-cancelar">Cancelar</button>
+        </div>
+      </form>
     </div>
   </div>
 </template>
@@ -47,6 +90,9 @@ export default {
       filtroIdade: null,
       filtroPeso: null,
       filtroHabitat: '',
+      animalSelecionado: null,
+      animalEditado: {},
+      modalVisivel: false,
     };
   },
   computed: {
@@ -59,8 +105,8 @@ export default {
       try {
         const response = await axios.get('http://localhost:3000/animais');
         this.animais = response.data;
-        this.animaisFiltrados = [...this.animais]; // Inicialize animaisFiltrados
-        this.aplicarFiltros(); // Aplique os filtros inicialmente
+        this.animaisFiltrados = [...this.animais];
+        this.aplicarFiltros();
       } catch (error) {
         console.error(error);
       }
@@ -78,25 +124,49 @@ export default {
     async excluirAnimal(id) {
       try {
         await axios.delete(`http://localhost:3000/animais/${id}`);
-        await this.fetchAnimais(); // Use await aqui
-        this.aplicarFiltros(); // Reaplique os filtros após excluir
+        await this.fetchAnimais();
+        this.aplicarFiltros();
       } catch (error) {
         console.error(error);
       }
     },
-    editarAnimal(animal) {
-      this.$emit('edit-animal', animal);
+    abrirModalEdicao(animal) {
+      this.animalEditado = { ...animal };  
+      this.modalVisivel = true;  
+    },
+    fecharModal() {
+      this.modalVisivel = false;  
+    },
+    async salvarEdicao() {
+      try {
+        await axios.put(`http://localhost:3000/animais/${this.animalEditado.id}`, this.animalEditado);
+        this.animalSelecionado = null; 
+        this.modalVisivel = false;
+        await this.fetchAnimais();
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    cancelarEdicao() {
+      this.animalSelecionado = null; 
     },
   },
   mounted() {
     this.fetchAnimais();
   },
   watch: {
-    // Adicione watchers para os filtros
-    filtroNome() { this.aplicarFiltros(); },
-    filtroIdade() { this.aplicarFiltros(); },
-    filtroPeso() { this.aplicarFiltros(); },
-    filtroHabitat() { this.aplicarFiltros(); },
+    filtroNome() {
+      this.aplicarFiltros();
+    },
+    filtroIdade() {
+      this.aplicarFiltros();
+    },
+    filtroPeso() {
+      this.aplicarFiltros();
+    },
+    filtroHabitat() {
+      this.aplicarFiltros();
+    },
   },
 };
 </script>
