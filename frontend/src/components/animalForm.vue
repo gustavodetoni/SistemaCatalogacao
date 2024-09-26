@@ -1,6 +1,6 @@
 <template>
   <div class="container-formulario">
-    <h2 class="titulo">{{ isEditing ? 'Editar Animal' : 'Adicionar Novo Animal' }}</h2>
+    <h2 class="titulo">Adicionar Novo Animal</h2>
     <form @submit.prevent="enviarFormulario" class="formulario">
       <div class="grupo-campo">
         <label for="nome">Nome:</label>
@@ -16,11 +16,7 @@
       </div>
       <div class="grupo-campo">
         <label for="status_de_saude">Status de Saúde:</label>
-        <select id="status_de_saude" v-model="animal.status_de_saude" required>
-          <option value="Saudável">Saudável</option>
-          <option value="Em tratamento">Em tratamento</option>
-          <option value="Crítico">Crítico</option>
-        </select>
+        <input type="text" id="status_de_saude" v-model="animal.status_de_saude" required />
       </div>
       <div class="grupo-campo">
         <label for="habitat">Habitat:</label>
@@ -36,22 +32,28 @@
       </div>
       <div class="grupo-campo">
         <label for="observacao">Observação:</label>
-        <textarea id="observacao" v-model="animal.observacao" rows="3"></textarea>
+        <textarea id="observacao" v-model="animal.observacao" rows="2"></textarea>
       </div>
-      <button @click="enviarFormulario" type="submit" class="botao-enviar">
-        {{ isEditing ? 'Atualizar' : 'Adicionar' }} Animal
-      </button>
+      <div class="grupo-campo-botao">
+          <button @click="enviarFormulario" type="submit" class="botao-enviar">
+            Cadastrar
+          </button>
+          <button @click="resetForm" type="submit" class="botao-limpar">Limpar</button>
+      </div>
     </form>
   </div>
+  <div v-if="popupVisivel" class="popup">
+    <p>Animal adicionado com sucesso!</p>
+    <button @click="fecharPopup">Fechar</button>
+  </div>
 </template>
-  
-  <script>
-  import axios from 'axios';
-  
-  export default {
+
+<script>
+import axios from 'axios';
+
+export default {
   data() {
     return {
-      isEditing: false,
       animal: {
         nome: '',
         idade: '',
@@ -62,40 +64,38 @@
         dieta: '',
         observacao: '',
       },
+      popupVisivel: false,
     };
   },
-    methods: {
-      async enviarFormulario() {
-        if (this.isEditing) {
-          await axios.put(`http://localhost:3000/animais/${this.animalToEdit.id}`, this.animal);
-        } else {
-          await axios.post('http://localhost:3000/animais', this.animal);
-        }
-        this.$emit('form-submitted');
+  methods: {
+    async enviarFormulario() {
+      try {
+        await axios.post('http://localhost:3000/animais', this.animal);
+        this.popupVisivel = true;
         this.resetForm();
-      },
-      resetForm() {
-        this.animal = { nome: '', idade: null, peso: null };
-        this.isEditing = false;
-      },
+      } catch (error) {
+        console.error('Erro ao adicionar animal:', error);
+      }
     },
-    watch: {
-      animalToEdit: {
-        immediate: true,
-        handler(newAnimal) {
-          if (newAnimal) {
-            this.animal = { ...newAnimal };
-            this.isEditing = true;
-          } else {
-            this.resetForm();
-          }
-        },
-      },
+    resetForm() {
+      this.animal = {
+        nome: '',
+        idade: null,
+        peso: null,
+        status_de_saude: '',
+        habitat: '',
+        comportamento: '',
+        dieta: '',
+        observacao: ''
+      };
     },
-  };
-  </script>
+    fecharPopup() {
+      this.popupVisivel = false;
+    },
+  },
+};
+</script>
 
 <style>
-    @import '../styles/animalForm.css';
+@import '../styles/animalForm.css';
 </style>
-  
