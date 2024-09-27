@@ -160,8 +160,11 @@ container-lista {
   }
   
   .formulario {
-    display: grid;
-    gap: 16px;
+    margin-right: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: stretch;
   }
   
   .campo {
@@ -185,7 +188,7 @@ container-lista {
   
   .botoes {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-around;
     gap: 16px;
     margin-top: 8px;
   }
@@ -200,6 +203,7 @@ container-lista {
   }
   
   .botao-salvar {
+    width: auto;
     background-color: #4CAF50;
     color: white;
   }
@@ -209,6 +213,7 @@ container-lista {
   }
   
   .botao-cancelar {
+    width: auto;
     background-color: #f44336;
     color: white;
   }

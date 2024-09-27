@@ -26,7 +26,7 @@
           <p><strong>Observação:</strong> {{ animal.observacao }}</p>
         </div>
         <div class="acoes-animal">
-          <img src="../assets/editar.png" class="botao"  @click="abrirModalEdicao(animal)" />
+          <img src="../assets/editar.png" class="botao" @click="abrirModalEdicao(animal)" />
           <img src="../assets/lixo.png" class="botao" @click="excluirAnimal(animal.id)" />
         </div>
       </div>
@@ -67,13 +67,13 @@
         </div>
         <div class="campo">
           <label for="observacao">Observação:</label>
-          <textarea id="observacao" v-model="animalEditado.observacao" rows="3"></textarea>
-        </div>
-        <div class="botoes">
-          <button type="submit" class="botao botao-salvar">Salvar</button>
-          <button type="button" @click="fecharModal" class="botao botao-cancelar">Cancelar</button>
+          <textarea id="observacao" v-model="animalEditado.observacao" rows="2"></textarea>
         </div>
       </form>
+      <div class="botoes">
+        <button type="submit" @click="salvarEdicao" class="botao botao-salvar">Salvar</button>
+        <button type="button" @click="fecharModal" class="botao botao-cancelar">Cancelar</button>
+      </div>
     </div>
   </div>
 </template>
@@ -113,9 +113,9 @@ export default {
     },
     aplicarFiltros() {
       this.animaisFiltrados = this.animais.filter(animal => {
-        const nomeCorresponde = animal.nome.toLowerCase().includes(this.filtroNome.toLowerCase());
-        const idadeCorresponde = !this.filtroIdade || animal.idade === Number(this.filtroIdade);
-        const pesoCorresponde = !this.filtroPeso || animal.peso === Number(this.filtroPeso);
+        const nomeCorresponde = !this.filtroNome || animal.nome.toLowerCase().startsWith(this.filtroNome.toLowerCase());
+        const idadeCorresponde = !this.filtroIdade || animal.idade.toString().startsWith(this.filtroIdade); //Startswith-> para buscar pela primeira letra 
+        const pesoCorresponde = !this.filtroPeso || animal.peso.toString().startsWith(this.filtroPeso);
         const habitatCorresponde = !this.filtroHabitat || animal.habitat === this.filtroHabitat;
 
         return nomeCorresponde && idadeCorresponde && pesoCorresponde && habitatCorresponde;

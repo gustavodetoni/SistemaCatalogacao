@@ -35,7 +35,7 @@
         <textarea id="observacao" v-model="animal.observacao" rows="2"></textarea>
       </div>
       <div class="grupo-campo-botao">
-          <button @click="enviarFormulario" type="submit" class="botao-enviar">
+          <button type="submit" class="botao-enviar">
             Cadastrar
           </button>
           <button @click="resetForm" type="submit" class="botao-limpar">Limpar</button>
@@ -86,7 +86,12 @@ export default {
         this.popupVisivel = true;
         this.resetForm();
       } catch (error) {
+        if (error.response.status === 400) {
+        alert('Usuário já existe, digite outro.');
+        this.resetForm();
+      } else {
         console.error('Erro ao adicionar animal:', error);
+      }
       }
     },
     resetForm() {
