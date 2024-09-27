@@ -11,7 +11,7 @@
         {{ habitat }}
       </option>
     </select>
-  </div>
+</div>
   <div class="container-lista">
     <div class="lista-cards">
       <div v-for="animal in animaisFiltrados" :key="animal.id" class="card-animal">
@@ -27,7 +27,7 @@
         </div>
         <div class="acoes-animal">
           <img src="../assets/editar.png" class="botao" @click="abrirModalEdicao(animal)" />
-          <img src="../assets/lixo.png" class="botao" @click="excluirAnimal(animal.id)" />
+          <img src="../assets/lixo.png" class="botao" @click="confirmarExclusao(animal.id)" />
         </div>
       </div>
     </div>
@@ -121,6 +121,12 @@ export default {
         return nomeCorresponde && idadeCorresponde && pesoCorresponde && habitatCorresponde;
       });
     },
+    confirmarExclusao(id) {
+    const confirmacao = window.confirm("Tem certeza que deseja excluir este animal?");
+    if (confirmacao) {
+      this.excluirAnimal(id);
+    }
+  },
     async excluirAnimal(id) {
       try {
         await axios.delete(`http://localhost:3000/animais/${id}`);
