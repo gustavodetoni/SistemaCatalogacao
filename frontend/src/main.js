@@ -4,7 +4,7 @@ import App from './App.vue'
 import { createRouter, createWebHistory } from 'vue-router';
 import AnimalList from './components/animalList.vue';
 import AnimalForm from './components/animalForm.vue';
-import AnimalDownload from './components/AnimalDownload.vue'
+import AnimalDownload from './components/animalDownload.vue'
 
 const routes = [
     {
