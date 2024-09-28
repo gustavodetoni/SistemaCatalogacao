@@ -1,4 +1,5 @@
 <template>
+  <div class="animalList">
   <div class="filtros">
     <input v-model="filtroNome" @input="aplicarFiltros" placeholder="Filtrar por nome" class="filtro-input">
     <input v-model.number="filtroIdade" @input="aplicarFiltros" type="number" placeholder="Filtrar por idade"
@@ -76,6 +77,7 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>

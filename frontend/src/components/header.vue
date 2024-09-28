@@ -22,12 +22,15 @@
     </div>
 
     <div v-if="menuMobileAberto" class="menu-mobile">
-      <a v-for="item in itensMenu" :key="item.nome" :href="item.link" class="link-menu-mobile">
-        {{ item.nome }}
-      </a>
-      <button class="botao-acao-mobile" @click="irParaAdicionarAnimal">
-        Adicionar Animal
-      </button>
+      <router-link to="/" class="link-menu-mobile">
+        Catalogo
+        </router-link>
+      <router-link to="/download" class="link-menu-mobile">
+          Download
+        </router-link>
+      <router-link to="/adicionar-animal" class="botao-acao-mobile">
+          Adicionar Animal
+        </router-link>
     </div>
   </header>
 </template>
@@ -48,8 +51,6 @@ const menuMobileAberto = ref(false)
 const abrirMenuMobile = () => {
   menuMobileAberto.value = !menuMobileAberto.value
 }
-
-
 </script>
 
 <style>

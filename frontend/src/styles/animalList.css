@@ -4,6 +4,10 @@ body, .card-animal, .botao {
   font-family: 'Roboto', sans-serif;
 }
 
+.animalList{
+  max-width: 1200px;
+}
+
 container-lista {
   max-width: 1200px;
   margin-top: 10 auto;
@@ -105,6 +109,7 @@ container-lista {
 }
 
   .filtros {
+    padding-top: 60px;
     display: flex;
     justify-content: space-between;
     margin: 40px;
