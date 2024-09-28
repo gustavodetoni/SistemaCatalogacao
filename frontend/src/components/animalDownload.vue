@@ -60,7 +60,7 @@ export default {
     methods: {
         async fetchAnimais() {
             try {
-                const response = await axios.get('http://localhost:3000/animais');
+                const response = await axios.get('https://sistema-catalogacao-back-git-main-gustavo-detonis-projects.vercel.app/animais');
                 this.animais = response.data;
                 this.animaisFiltrados = [...this.animais];
                 this.aplicarFiltros();

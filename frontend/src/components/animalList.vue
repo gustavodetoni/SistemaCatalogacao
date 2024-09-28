@@ -103,7 +103,7 @@ export default {
   methods: {
     async fetchAnimais() {
       try {
-        const response = await axios.get('http://localhost:3000/animais');
+        const response = await axios.get('https://sistema-catalogacao-back-git-main-gustavo-detonis-projects.vercel.app/animais');
         this.animais = response.data;
         this.animaisFiltrados = [...this.animais];
         this.aplicarFiltros();
@@ -129,7 +129,7 @@ export default {
   },
     async excluirAnimal(id) {
       try {
-        await axios.delete(`http://localhost:3000/animais/${id}`);
+        await axios.delete(`https://sistema-catalogacao-back-git-main-gustavo-detonis-projects.vercel.app/animais/${id}`);
         await this.fetchAnimais();
         this.aplicarFiltros();
       } catch (error) {
@@ -145,7 +145,7 @@ export default {
     },
     async salvarEdicao() {
       try {
-        await axios.put(`http://localhost:3000/animais/${this.animalEditado.id}`, this.animalEditado);
+        await axios.put(`https://sistema-catalogacao-back-git-main-gustavo-detonis-projects.vercel.app/animais/${this.animalEditado.id}`, this.animalEditado);
         this.animalSelecionado = null;
         this.modalVisivel = false;
         await this.fetchAnimais();
